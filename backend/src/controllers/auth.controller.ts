@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../modules/user.model');
-const sendEmail = require('../modules/user.model');
+const User = require('../models/user.model');
+const sendEmail = require('../utils/sendEmail');
 
 // REGISTER
 const register = async (req: Request, res: Response) => {
@@ -50,19 +50,19 @@ const register = async (req: Request, res: Response) => {
 
 		console.log('verifyUrl: ', verifyUrl);
 
-		// await sendEmail(
-		// 	email,
-		// 	'Verify your account',
-		// 	`<h3>Click to verify:</h3><a href="${verifyUrl}">Verify</a>`,
-		// );
+		await sendEmail(
+			email,
+			'Verify your account',
+			`<h3>Click to verify:</h3><a href="${verifyUrl}">Verify</a>`,
+		);
 
 		res.status(201).json({
 			success: true,
 			message: 'Registered. Verify email.',
 		});
-	} catch (error) {
+	} catch (error: any) {
 		console.log("error: ", error);
-		res.status(500).json({ message: 'Server error' });
+		res.status(500).json({ message: error.message || 'Server error' });
 	}
 };
 
@@ -96,7 +96,7 @@ const login = async (req: Request, res: Response) => {
 		const token = jwt.sign(
 			{ id: user._id, role: user.role },
 			process.env.JWT_SECRET as string,
-			{ expiresIn: '7d' },
+			{ expiresIn: process.env.JWT_EXPIRES_IN },
 		);
 
 		res.json({
@@ -105,6 +105,7 @@ const login = async (req: Request, res: Response) => {
 			user: {
 				id: user._id,
 				name: user.name,
+				email: user.email,
 				role: user.role,
 			},
 		});
