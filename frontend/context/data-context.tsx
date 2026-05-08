@@ -4,7 +4,9 @@ import React, { createContext, useEffect } from 'react';
 interface ActiveUser {
 	id: string;
 	name: string;
+	email: string;
 	role: string;
+	initials: string // Optional
 }
 
 interface DataContextType {
@@ -34,8 +36,6 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
             setActiveUser(user);
         }
     }, []);
-
-    console.log('Active User in DataContext:', activeUser); // Debugging line to check active user state
 
 	return (
 		<DataContext.Provider value={{ activeUser, updateActiveUser }}>

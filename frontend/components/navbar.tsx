@@ -266,7 +266,7 @@ export default function Navbar() {
 										>
 											<Avatar className="w-8 h-8 ring-2 ring-rose-200">
 												<AvatarImage
-													src={user.avatar}
+													// src={user.avatar}
 													alt={user.name}
 												/>
 												<AvatarFallback className="bg-gradient-to-br from-rose-400 to-pink-500 text-white text-xs font-bold">
@@ -466,7 +466,7 @@ export default function Navbar() {
 												<div className="flex items-center gap-3 px-3 py-3 bg-gray-50 rounded-xl">
 													<Avatar className="w-10 h-10 ring-2 ring-rose-200">
 														<AvatarImage
-															src={user.avatar}
+															// src={user.avatar}
 															alt={user.name}
 														/>
 														<AvatarFallback className="bg-gradient-to-br from-rose-400 to-pink-500 text-white text-sm font-bold">
