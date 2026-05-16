@@ -1,0 +1,9 @@
+🔥 Pro-Level Improvements (IMPORTANT)
+
+👉 Add later for production:
+
+Pre-save password hashing
+Product stock auto-update after order
+Cart total auto calculation middleware
+Order payment verification (Stripe webhook)
+Soft delete (isActive)
